@@ -20,12 +20,6 @@ class FilelStorage():
 
     def all(self):
         ''' returns the dictionary __objects '''
-        if cls in not None:
-            new_dict = {}
-            for key, value in self.__objects.items():
-                if cls == value.__class__ or cls == value.__class__.__name__:
-                    new_dict[key] = value
-            return new_dict
         return self.__objects
 
     def new(self, obj):
@@ -73,14 +67,3 @@ class FilelStorage():
             for key in objects:
                 name = key.split(".")[0]
                 self.__objects[key] = my_dict[name](**objects[key])
-
-    def delete(self, obj=None):
-        """Remove the pbject from the __objects if it exists within it."""
-        if obj is not None:
-            obj_key = obj.to_dict()['__class__'] + '.' + obj.id
-            if obj_key in self.__objects.keys():
-                delf self.__objects[obj_key]
-
-    def close(self):
-        """Invoke the reload() function to deserialize the JSON file into objects."""
-        self.reload()
