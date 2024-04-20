@@ -2,51 +2,42 @@
 """
 Initiates a Flask-based web application.
 """
+
 from flask import Flask, render_template
+
 app = Flask(__name__)
 
 
 @app.route('/', strict_slashes=False)
-def index():
-    """The main page"""
-    return 'HBNB'
+def hello_hbnb():
+    """Shows 'Hello HBNB!'"""
+    return 'Hello HBNB!'
 
 @app.route('/hbnb', strict_slashes=False)
 def hbnb():
-    """page of HBNB"""
+    """Displays 'Hello HBNB!'"""
     return 'HBNB'
 
-@app.route('/c/<text>',  strict_slashes=False)
-def cisfun(text):
-    """Show "c" followed by the value of the text variable"""
-    return 'C ' + text.replace('_', ' ')
+@app.route('/c/<text>', strict_slashes=False)
+def c_text(text):
+    """Show "C" along with the value stored in the text variable"""
+    return 'C {}'.format(text.replace('_', ' '))
 
-@app.route('/python',  strict_slashes=False)
-@app.route('/python/<text>',  strict_slashes=False)
-def pythoniscool(text='is cool'):
-    """Show "python" and then the value stored in the text"""
-    return 'python' + text.replace('_', ' ')
+@app.route('/python', defaults={'text': 'is cool'}, strict_slashes=False)
+@app.route('/python/<text>', strict_slashes=False)
+def python_text(text):
+    """Show "python" and then the value stored in the text variable"""
+    return 'python {}'.format(text.replace('_', ' '))
 
-@app.route('/number/<int:n>' , strict_slashes=False)
-def imanumber(n):
+@app.route('/number/<int:n>', strict_slashes=False)
+def number(n):
     """Show "n is a number" only if n is an integer"""
-    return "{:d} is a number". format(n)
+    return '{} is a number'.format(n)
 
-@app.route('/number_template/<int:n>',  strict_slashes=False)
-def numbersandtemplates(n):
-    """Presents an HTML page only if n is an integer"""
+@app.route('/number_template/<int:n>', strict_slashes=False)
+def number_templates(n):
+    """Show an HTML page only if n is an integer"""
     return render_template('5-number.html', n=n)
 
-@app.route('/number_odd_or_even/<init:n>',  strict_slashes=False)
-def numbersandevenness(n):
-    """Show sn HTML page only if n is an integer"""
-    if n % 2 == 0:
-        evenness == 'even'
-    else:
-        evenness == 'old'
-    return render_template('6-number_odd_or_even.html', n=n,
-                            evenness=evenness)
-
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port'5000')
-
+    app.run(host='0.0.0.0', port=5000)

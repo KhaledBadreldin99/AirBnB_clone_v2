@@ -7,19 +7,22 @@ from flask import Flask
 app = Flask(__name__)
 
 @app.route('/', strict_slashes=False)
-def index():
-    '''The main page'''
+def hello_hbnb():
+    '''Shows "Hello HBNB!" when acessing the main URL.'''
+
     return 'HelloHBNB!'
 
 @app.route('/hbnb', strict_slashes=False)
-def hbnb():
-    """returns HBNB"""
+def display_hbnb():
+    """ Displays 'HBNB' when acessing /hbnb URL."""
+
     return 'HBNB'
 
 @app.route('/c/<text>', strict_slashes=False)
-def cisfun(text):
+def display_c(text):
     """Show "C" along with the value stored in the text variable."""
-    return 'C ' + text.replace('_', ' ')
+
+    return 'C {}' .format(text.replace('_', ' '))
 
 
 if __name__ == '__main__':
